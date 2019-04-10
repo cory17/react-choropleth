@@ -5,7 +5,7 @@ import { ajax } from 'rxjs/ajax'
 import * as epics from './epics'
 import * as reducers from './reducers'
 
-const base = '/api/'
+const base = 'https://raw.githubusercontent.com/cory17/react-choropleth/master/api/'
 
 const getFile = (url: string) => ajax.getJSON(base + url)
 

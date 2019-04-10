@@ -1,5 +1,5 @@
 import {switchMap, map, catchError, pluck} from 'rxjs/operators'
-import {of, pipe, Observable} from 'rxjs'
+import {of, pipe} from 'rxjs'
 import {Epic, ofType} from 'redux-observable'
 import * as actions from './actions'
 import { insertChoropleth, insertToporefs, httpError } from './actions' 

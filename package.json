@@ -54,6 +54,5 @@
     "react-app-rewired": "^2.1.1",
     "redux-devtools-extension": "^2.13.8"
   },
-  "homepage": "https://cory17.github.io/react-choropleth",
-  "proxy": "https://raw.githubusercontent.com/cory17/react-choropleth/master"
+  "homepage": "https://cory17.github.io/react-choropleth"
 }
