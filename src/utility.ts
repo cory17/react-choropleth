@@ -5,8 +5,6 @@ import { Dict, Store, Region, RegionProps, Feature, Geojson, Topojson, TopoDescr
 const defaultIntensity = 0
 const maxIntensity = 7
 
-
-
 export const createChoropleth = ({features, ...geo}: Geojson): Choropleth => {
 
     const newFeatures = features.map( 
@@ -77,4 +75,12 @@ function saveJSON(data: object, fileName: string) {
     a.dispatchEvent(event)
 }
 
+
+
+let idSequence = 0
+
+export function generateID() {
+    ++idSequence
+    return idSequence
+}
 

@@ -8,6 +8,7 @@ import {History} from 'history'
 import MapPage from './MapPage'
 import {Store, Geojson, TopoRef} from '../models'
 import { browseMaps, requestTopojson, insertChoropleth} from '../actions'
+import {generateID} from '../utility'
 const {Header, Content} = Layout
 
 
@@ -72,7 +73,7 @@ class AppContainer extends React.Component<Props, State> {
         const { key } = toporefs.find(({ name: n }) => n == name)!
         this.setState({
             appStatus: 'mapping',
-            geoID: Date.now()
+            geoID: generateID()
         }, () => {
             this.props.requestTopojson(name, key, this.state.geoID!)
         })
@@ -81,7 +82,7 @@ class AppContainer extends React.Component<Props, State> {
     handleUpload = (geo: Geojson) => {
         this.setState({
             appStatus: 'mapping',
-            geoID: Date.now(),
+            geoID: generateID(),
         }, () => { 
             const id = this.state.geoID!
             this.props.onUpload(id, geo) 
