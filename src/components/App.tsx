@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {compose} from 'redux'
 import { connect } from 'react-redux'
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import {Layout, Button, message} from 'antd'
 import MapBrowser from './MapBrowser'
 import {History} from 'history'
@@ -15,7 +14,6 @@ const {Header, Content} = Layout
 type AppStatus = 'browsing' | 'mapping'
 
 type Props = {
-    history: History,
     toporefs: TopoRef[],
     browseMaps: () => void,
     requestTopojson: (name: string, key: string, id: number) => void,
@@ -31,7 +29,6 @@ type AppProps = {
     isBrowsing: boolean,
     geoID?: number,
     toporefs: TopoRef[],
-    onAuthentication: () => void,
     onTopoSelect: (name: string) => void,
     onUpload: (geo: Geojson) => void,
     onUploadError: () => void,
@@ -46,16 +43,11 @@ const App = ({isBrowsing, geoID, toporefs, ...actions}: AppProps) => (
        
         </Header>
         <Content>
-            <Switch>
-                <Route path='/create'
-                    render={() => isBrowsing ? <MapBrowser toporefs={toporefs}
+        {isBrowsing ? <MapBrowser toporefs={toporefs}
                         onTopoSelect={actions.onTopoSelect}
                         onUpload={actions.onUpload}
                         onUploadError={actions.onUploadError} /> :
-                        <MapPage geoID={geoID!} />
-                    } />
-                <Redirect to="/create"/>
-            </Switch>
+                        <MapPage geoID={geoID!} />}
         </Content>
     </Layout>
 )
@@ -82,7 +74,7 @@ class AppContainer extends React.Component<Props, State> {
     handleUpload = (geo: Geojson) => {
         this.setState({
             appStatus: 'mapping',
-            geoID: generateID(),
+            geoID: generateID()
         }, () => { 
             const id = this.state.geoID!
             this.props.onUpload(id, geo) 
@@ -93,9 +85,6 @@ class AppContainer extends React.Component<Props, State> {
         message.error('ERROR: Could not load file')
     }
 
-    handleAuthentication = () => {
-        this.props.history.push('/mymaps')
-    }
 
     handleNewMapClick = () => {
         this.setState({
@@ -121,7 +110,6 @@ class AppContainer extends React.Component<Props, State> {
         return <App isBrowsing={isBrowsing} 
                     geoID={geoID}
                     toporefs={toporefs} 
-                    onAuthentication={this.handleAuthentication}
                     onUploadError={this.handleFileError}
                     onUpload={this.handleUpload}
                     onTopoSelect={this.handleTopoSelect} 
@@ -130,17 +118,14 @@ class AppContainer extends React.Component<Props, State> {
     }
 }
 
-export default compose<React.ComponentType>(
-    withRouter,
-    connect(
-        ({toporefs}: Store) => ({
+export default connect(
+    ({ toporefs }: Store) => ({
         toporefs
-        }),
-        {
-            browseMaps, 
-            requestTopojson,
-            onUpload: insertChoropleth
-        }
-    )
+    }),
+    {
+        browseMaps,
+        requestTopojson,
+        onUpload: insertChoropleth
+    }
 )(AppContainer)
     
