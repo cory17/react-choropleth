@@ -1,6 +1,6 @@
 # react-choropleth
 
-A React + redux-observable + Typscript application for making choropleths from Geojson or Topojson files
+A React + redux-observable + Typescript application for making choropleths from Geojson or Topojson files
 
 ## View
 
