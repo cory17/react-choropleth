@@ -46,4 +46,12 @@ export const updateIntensity = (
     }
 })
 
+export const httpError = (type: string, info: object = {}) => ({
+    type: 'httpError',
+    data: {
+        type,
+        ...info
+    }
+})
+
 
