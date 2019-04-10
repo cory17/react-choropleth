@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "46f340b74f87bb88d19e",
+    "revision": "158352582b7d743c6d96",
     "url": "/react-choropleth/static/css/main.7b8c0d12.chunk.css"
   },
   {
-    "revision": "46f340b74f87bb88d19e",
-    "url": "/react-choropleth/static/js/main.46f340b7.chunk.js"
+    "revision": "158352582b7d743c6d96",
+    "url": "/react-choropleth/static/js/main.15835258.chunk.js"
   },
   {
     "revision": "a6d224073b4b6cac02b0",
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/react-choropleth/static/js/2.3cc6e342.chunk.js"
   },
   {
-    "revision": "f336c65ccaa939a84203e2708baebc90",
+    "revision": "34c86a6641942f31c60910890534c555",
     "url": "/react-choropleth/index.html"
   }
 ];
