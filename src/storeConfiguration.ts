@@ -1,4 +1,4 @@
-import { composeWithDevTools } from 'redux-devtools-extension' /* REMOVE IN PRODUCTION !!! */
+import { composeWithDevTools } from 'redux-devtools-extension' 
 import { combineReducers, createStore, applyMiddleware } from 'redux'
 import { combineEpics, createEpicMiddleware } from 'redux-observable'
 import { ajax } from 'rxjs/ajax'

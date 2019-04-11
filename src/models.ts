@@ -1,4 +1,4 @@
-import { Geometry } from 'geojson';
+import { Geometry } from 'geojson'
 
 export interface RegionProps extends Dict<any> {
     index: number,
@@ -45,6 +45,7 @@ export type TopoRef = {
 }
 
 export type IntensityMap = Dict<number>
+export type IntensityMapStore = Dict<IntensityMap>
 
 
 export type Choropleth = {
@@ -57,5 +58,5 @@ export type Choropleth = {
 export type Store = {
     geojsons: GeojsonStore,
     toporefs: TopoRef[],
-    intensityMaps: Dict<IntensityMap>
+    intensityMaps: IntensityMapStore
 }

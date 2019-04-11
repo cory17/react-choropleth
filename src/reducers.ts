@@ -1,5 +1,4 @@
-import { Dict, TopoRef, GeojsonStore, Geojson, RegionProps, IntensityMap } from './models'
-import { ReactReduxContext } from 'react-redux';
+import { TopoRef, IntensityMapStore, GeojsonStore } from './models'
 import { Reducer } from 'redux'
 
 
@@ -28,7 +27,7 @@ export const toporefs: Reducer<TopoRef[]> = (state = [], action) => {
     }
 }
 
-export const intensityMaps: Reducer<Dict<IntensityMap>> = (state = {}, action) => {
+export const intensityMaps: Reducer<IntensityMapStore> = (state = {}, action) => {
 
     switch (action.type) {
         case 'insert choropleth': {

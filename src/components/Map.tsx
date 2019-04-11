@@ -1,6 +1,5 @@
 import React from 'react'
 import 'leaflet/dist/leaflet.css'
-import PropTypes from 'prop-types'
 import LeafletMap from '../map'
 
 type Props = {

@@ -2,10 +2,10 @@ import React from 'react'
 import { Tabs, Table, Tag, Slider } from 'antd'
 import { feature } from 'topojson'
 import { Region } from '../models'
-import { SliderValue } from 'antd/lib/slider';
-import { MAX_INTENSITY, INTENSITY_COLORS } from '../utility';
-const {TabPane} = Tabs
-const {Column} = Table
+import { SliderValue } from 'antd/lib/slider'
+import { MAX_INTENSITY, INTENSITY_COLORS } from '../utility'
+const { TabPane } = Tabs
+const { Column } = Table
 
 type Props = {
 	loading: boolean,

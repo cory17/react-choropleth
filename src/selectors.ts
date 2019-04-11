@@ -1,6 +1,6 @@
 import { createSelector, createStructuredSelector, ParametricSelector } from 'reselect'
 import { feature } from 'topojson'
-import { Choropleth, Dict, Store, Region, RegionProps, Feature, Geojson, Topojson } from './models'
+import { Choropleth, Dict, Store, Region, RegionProps, Geojson} from './models'
 
 type Props = {
     geoID: number

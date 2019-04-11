@@ -1,5 +1,5 @@
 import { topoToGeo, createChoropleth } from './utility'
-import { TopoRef, Geojson, RegionProps, Topojson, Choropleth } from './models'
+import { TopoRef, Geojson } from './models'
 
 
 export const browseMaps = () => ({
@@ -47,7 +47,7 @@ export const updateIntensity = (
 })
 
 export const httpError = (type: string, info: object = {}) => ({
-    type: 'httpError',
+    type: 'http error',
     data: {
         type,
         ...info

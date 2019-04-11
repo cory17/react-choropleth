@@ -1,7 +1,7 @@
 import React from 'react'
 import { Upload, message, List, Menu, Button, Icon, Card } from 'antd'
-import { UploadChangeParam } from 'antd/lib/upload';
-import { RcFile } from 'antd/lib/upload/interface';
+import { UploadChangeParam } from 'antd/lib/upload'
+import { RcFile } from 'antd/lib/upload/interface'
 import { TopoRef, Geojson } from '../models'
 import { topoToGeo } from '../utility'
 import L from 'leaflet'

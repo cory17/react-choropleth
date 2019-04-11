@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Geojson, RegionProps } from '../models'
 import { MapContext } from './Map'
 
