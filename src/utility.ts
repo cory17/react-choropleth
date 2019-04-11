@@ -1,32 +1,39 @@
 import { feature } from 'topojson'
-import { Dict, Store, Region, RegionProps, Feature, Geojson, Topojson, TopoDescriptor, Choropleth} from './models'
+import { Dict, Store, Region, RegionProps, Feature, Geojson, Topojson, TopoDescriptor, Choropleth } from './models'
 
+export const MAX_INTENSITY = 7
+export const INTENSITY_COLORS = ['#FFEDA0',
+    '#FED976',
+    '#FEB24C',
+    '#FD8D3C',
+    '#FC4E2A',
+    '#E31A1C',
+    '#BD0026',
+    '#800026'
+]
 
-const defaultIntensity = 0
-const maxIntensity = 7
+export const createChoropleth = ({ features, ...geo }: Geojson) => {
 
-export const createChoropleth = ({features, ...geo}: Geojson): Choropleth => {
-
-    const newFeatures = features.map( 
-        ({properties, ...feature}, index) => {
+    const newFeatures = features.map(
+        ({ properties, ...feature }, index) => {
 
             const props = properties as Dict<any>
-            const {intensity} = props
+            const { intensity } = props
 
-            const isIntensityValid = typeof intensity === 'number' && intensity < maxIntensity
+            const isIntensityValid = typeof intensity === 'number' && intensity <= MAX_INTENSITY
 
             return {
                 ...feature,
                 properties: {
                     index,
                     ...props,
-                    intensity: isIntensityValid ? intensity : defaultIntensity
-             }
-        }
+                    intensity: isIntensityValid ? intensity : 0
+                }
+            }
         }
     )
 
-    const intensities = newFeatures.reduce((result, {properties}) => ({
+    const intensities = newFeatures.reduce((result, { properties }) => ({
         ...result,
         [properties.index]: properties.intensity
     }), {})
@@ -51,7 +58,7 @@ export function saveChoropleth(geo: Geojson<RegionProps>, intensities: Dict<numb
 
     saveJSON({
         ...geo,
-        features: geo.features.map( ({properties, ...feature}) => ({
+        features: geo.features.map(({ properties, ...feature }) => ({
             ...feature,
             properties: {
                 ...properties,
@@ -64,7 +71,7 @@ export function saveChoropleth(geo: Geojson<RegionProps>, intensities: Dict<numb
 function saveJSON(data: object, fileName: string) {
 
     const text = JSON.stringify(data)
-    const blob = new Blob([text], {type: 'text/json'})
+    const blob = new Blob([text], { type: 'text/json' })
     const event = new MouseEvent('click', {})
 
     const a = document.createElement('a')

@@ -31,7 +31,7 @@ const store = createStore(
         )
     ) : applyMiddleware(
         epicMiddleware
-    ) 
+    )
 )
 
 epicMiddleware.run(rootEpic)

@@ -1,27 +1,23 @@
-import React, {useState} from 'react'
-import {connect} from 'react-redux'
-import {Layout, Button, Input} from 'antd'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { Layout, Button, Input } from 'antd'
 import Editor from './Editor'
 import Map from './Map'
 import { MapGeojson, FeatureZoom } from './mapComponents'
-import { Store, Dict, Region, RegionProps, Geojson } from '../models'
-import {getGeojson, getRegions, getIntensities} from '../selectors'
+import { Store, Choropleth } from '../models'
+import { getChoropleth } from '../selectors'
 import LeafletMap from '../map'
-import {updateIntensity} from '../actions'
-import {saveChoropleth} from '../utility'
+import { updateIntensity } from '../actions'
+import { saveChoropleth } from '../utility'
 
-const {Header, Content, Sider} = Layout
+const { Header, Content, Sider } = Layout
 
 type Props = {
 	geoID: number,
-	updateIntensity: (mapID: number, featureID: number, newValue: number) => void
-} & MapProps
+} & Choropleth & DispatchProps
 
-type MapProps = {
-	loading: boolean,
-	intensities?: Dict<number>,
-	geojson?: Geojson<RegionProps>,
-	regions?: Region[],
+type DispatchProps = {
+	onIntensityChange: (mapID: number, featureID: number, newValue: number) => void
 }
 
 type State = {
@@ -50,7 +46,7 @@ class MapPageContainer extends React.Component<Props, State> {
 		const { geoID } = this.props
 		const featureID = id
 
-		this.props.updateIntensity(geoID, featureID, newValue)
+		this.props.onIntensityChange(geoID, featureID, newValue)
 		this.state.map!.updateFeature(id, newValue)
 	}
 
@@ -61,10 +57,6 @@ class MapPageContainer extends React.Component<Props, State> {
 			...this.state,
 			map
 		})
-	}
-
-	handleSaveFormSubmit = () => {
-		console.log('sub')
 	}
 
 	handleSave = () => {
@@ -92,7 +84,9 @@ class MapPageContainer extends React.Component<Props, State> {
 				<Content>
 					<Layout className='app-content'>
 						<Header style={{ background: '#f2f2f2' }}>
-							<Button icon='save' disabled={loading} onClick={this.handleSave}>Save</Button>
+							<Button icon='save'
+								disabled={loading}
+								onClick={this.handleSave}>Save</Button>
 						</Header>
 						<Content>
 							<Map onLoad={this.handleMapLoad}>
@@ -113,17 +107,7 @@ class MapPageContainer extends React.Component<Props, State> {
 	}
 }
 
-export default connect<MapProps, {
-	updateIntensity: (mapID: number, featureID: number, newValue: number) => void
-},
-	{ geoID: number }, Store>(
-		(s, p) => ({
-			geojson: getGeojson(s, p),
-			intensities: getIntensities(s, p),
-			regions: getRegions(s, p),
-			loading: !getGeojson(s, p)
-		}),
-		{
-			updateIntensity
-		}
-	)(MapPageContainer)
+export default connect<Choropleth, DispatchProps, { geoID: number }, Store>(
+	getChoropleth,
+	{ onIntensityChange: updateIntensity }
+)(MapPageContainer)

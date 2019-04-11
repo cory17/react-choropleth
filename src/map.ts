@@ -1,5 +1,6 @@
 import L, { LeafletEventHandlerFn } from 'leaflet'
 import { Dict, Geojson, RegionProps, Feature } from './models'
+import { INTENSITY_COLORS } from './utility'
 
 type MapConfig = {
 	url: string,
@@ -9,28 +10,10 @@ type MapConfig = {
 	maxZoom?: number
 }
 
-type Popup = {
-	_latlng: L.LatLng,
-	_container: {
-		clientHeight: number
-	}
-}
-
-
 type ControlConstructor = (ops: { position: string }) => L.Control
 
 type Project = (l: L.LatLng) => L.Point
 type Unproject = (p: L.Point) => L.LatLng
-
-const colors = ['#FFEDA0',
-	'#FED976',
-	'#FEB24C',
-	'#FD8D3C',
-	'#FC4E2A',
-	'#E31A1C',
-	'#BD0026',
-	'#800026'
-]
 
 
 export default class LeafletMap {
@@ -61,24 +44,6 @@ export default class LeafletMap {
 		}).addTo(this.map)
 
 		this.refresh()
-
-		this.map.on('popupopen', e => {
-
-			const event = e as L.PopupEvent
-			const popup = event.popup as unknown as Popup
-			const project = this.map!.project as unknown as Project
-			const unproject = this.map!.unproject as unknown as Unproject
-
-			const loc = project(popup._latlng)
-
-			loc.y -= popup._container.clientHeight / 2
-
-			this.map!.panTo(
-				unproject(loc), {
-					animate: true
-				}
-			)
-		})
 	}
 
 	//Call this.refresh() to update the screen after calling this.addGeojson
@@ -95,7 +60,7 @@ export default class LeafletMap {
 				const { index, intensity } = feature.properties
 
 				const style = {
-					fillColor: colors[intensity],
+					fillColor: INTENSITY_COLORS[intensity],
 					weight: 2,
 					opacity: 1,
 					color: 'white',
@@ -122,7 +87,7 @@ export default class LeafletMap {
 
 	updateFeature(index: number, intensity: number) {
 		this.featureLayers[index].setStyle(
-			{ fillColor: colors[intensity] }
+			{ fillColor: INTENSITY_COLORS[intensity] }
 		)
 	}
 

@@ -1,5 +1,5 @@
-import {topoToGeo, createChoropleth} from './utility'
-import {TopoRef, Geojson, RegionProps, Topojson, Choropleth} from './models'
+import { topoToGeo, createChoropleth } from './utility'
+import { TopoRef, Geojson, RegionProps, Topojson, Choropleth } from './models'
 
 
 export const browseMaps = () => ({
@@ -28,14 +28,14 @@ export const requestTopojson = (name: string, key: string, id: number) => ({
 
 export const insertToporefs = (toporefs: TopoRef[]) => ({
     type: 'insert toporefs',
-    data: {toporefs}
+    data: { toporefs }
 })
 
 
 
 export const updateIntensity = (
     geoID: number,
-    featureID: number, 
+    featureID: number,
     newValue: number
 ) => ({
     type: 'update intensity',

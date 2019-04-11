@@ -10,7 +10,7 @@ import store from './storeConfiguration'
 ReactDOM.render(
     <LocaleProvider locale={enUS}>
         <Provider store={store}>
-             <App/>
+            <App />
         </Provider>
     </LocaleProvider>,
     document.getElementById('root')

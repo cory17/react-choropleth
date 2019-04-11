@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import {compose} from 'redux'
+import { compose } from 'redux'
 import { connect } from 'react-redux'
-import {Layout, Button, message} from 'antd'
+import { Layout, Button, message } from 'antd'
 import MapBrowser from './MapBrowser'
-import {History} from 'history'
+import { History } from 'history'
 import MapPage from './MapPage'
-import {Store, Geojson, TopoRef} from '../models'
-import { browseMaps, requestTopojson, insertChoropleth} from '../actions'
-import {generateID} from '../utility'
-const {Header, Content} = Layout
+import { Store, Geojson, TopoRef } from '../models'
+import { browseMaps, requestTopojson, insertChoropleth } from '../actions'
+import { generateID } from '../utility'
+const { Header, Content } = Layout
 
 
 type AppStatus = 'browsing' | 'mapping'
@@ -35,19 +35,21 @@ type AppProps = {
     onNewMapClick: () => void
 }
 
-const App = ({isBrowsing, geoID, toporefs, ...actions}: AppProps) => (
+
+const App = ({ isBrowsing, geoID, toporefs, ...actions }: AppProps) => (
     <Layout className='app'>
         <Header>
-     
-            <Button ghost={true} onClick={actions.onNewMapClick} >New Map</Button>
-       
+
+            <Button ghost={true}
+                onClick={actions.onNewMapClick} >New Map</Button>
+
         </Header>
         <Content>
-        {isBrowsing ? <MapBrowser toporefs={toporefs}
-                        onTopoSelect={actions.onTopoSelect}
-                        onUpload={actions.onUpload}
-                        onUploadError={actions.onUploadError} /> :
-                        <MapPage geoID={geoID!} />}
+            {isBrowsing ? <MapBrowser toporefs={toporefs}
+                onTopoSelect={actions.onTopoSelect}
+                onUpload={actions.onUpload}
+                onUploadError={actions.onUploadError} /> :
+                <MapPage geoID={geoID!} />}
         </Content>
     </Layout>
 )
@@ -75,9 +77,9 @@ class AppContainer extends React.Component<Props, State> {
         this.setState({
             appStatus: 'mapping',
             geoID: generateID()
-        }, () => { 
+        }, () => {
             const id = this.state.geoID!
-            this.props.onUpload(id, geo) 
+            this.props.onUpload(id, geo)
         })
     }
 
@@ -97,7 +99,7 @@ class AppContainer extends React.Component<Props, State> {
 
     render() {
 
-        const {geoID} = this.state
+        const { geoID } = this.state
 
         const {
             toporefs,
@@ -107,14 +109,14 @@ class AppContainer extends React.Component<Props, State> {
         const { appStatus } = this.state
         const isBrowsing = appStatus == 'browsing'
 
-        return <App isBrowsing={isBrowsing} 
-                    geoID={geoID}
-                    toporefs={toporefs} 
-                    onUploadError={this.handleFileError}
-                    onUpload={this.handleUpload}
-                    onTopoSelect={this.handleTopoSelect} 
-                    onNewMapClick={this.handleNewMapClick}/>
-        
+        return <App isBrowsing={isBrowsing}
+            geoID={geoID}
+            toporefs={toporefs}
+            onUploadError={this.handleFileError}
+            onUpload={this.handleUpload}
+            onTopoSelect={this.handleTopoSelect}
+            onNewMapClick={this.handleNewMapClick} />
+
     }
 }
 
@@ -128,4 +130,4 @@ export default connect(
         onUpload: insertChoropleth
     }
 )(AppContainer)
-    
+

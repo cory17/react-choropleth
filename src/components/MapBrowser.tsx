@@ -1,12 +1,11 @@
 import React from 'react'
-import { Upload, message, List, Menu, Button, Icon, Card }from 'antd'
+import { Upload, message, List, Menu, Button, Icon, Card } from 'antd'
 import { UploadChangeParam } from 'antd/lib/upload';
 import { RcFile } from 'antd/lib/upload/interface';
 import { TopoRef, Geojson } from '../models'
-import {topoToGeo} from '../utility'
+import { topoToGeo } from '../utility'
 import L from 'leaflet'
-const {Item} = Menu
-
+const { Item } = Menu
 
 
 type TopoItemProps = {
@@ -26,7 +25,6 @@ type Props = {
 	toporefs: TopoRef[],
 	onUploadError: (err: UploadError) => void
 }
-
 
 
 function parseGeographyFile(text: string) {
@@ -95,7 +93,14 @@ export default class MapBrowser extends React.Component<Props> {
 	}
 
 	handleDrop = (text: string) => {
+
 		const geo = parseGeographyFile(text)
+
+		/*
+			geo.type == 'Topology' -> treat as Topojson file
+			geo.type == 'FeatureCollection' -> treat as Geojson file
+			otherwise -> display error message
+		*/
 
 		switch (geo.type) {
 			case 'Topology': {
@@ -152,7 +157,6 @@ export default class MapBrowser extends React.Component<Props> {
 			}
 			default:
 				this.props.onUploadError('parse')
-
 		}
 	}
 

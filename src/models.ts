@@ -8,7 +8,7 @@ export interface RegionProps extends Dict<any> {
 export type Region = {
     index: number,
     intensity: number,
-    props: Array<{key: string, value: any}>
+    props: Array<{ key: string, value: any }>
 }
 
 export type Dict<T> = {
@@ -29,7 +29,7 @@ export type GeometryCollection = {
 
 export type Topojson = {
     type: 'GeometryCollection',
-    objects: {[key: string]: GeometryCollection}
+    objects: { [key: string]: GeometryCollection }
 }
 
 export type TopoDescriptor = {
@@ -44,28 +44,17 @@ export type TopoRef = {
     key: string
 }
 
-
-export type Request = {
-    loading: boolean,
-    data: Dict<any>,
-    error?: any
-}
-
-export type User = {
-    name: string
-}
-
-
 export type IntensityMap = Dict<number>
 
+
 export type Choropleth = {
-    geo: Geojson<RegionProps>,
-    intensities: Dict<number>
+    loading: boolean,
+    intensities?: Dict<number>,
+    geojson?: Geojson<RegionProps>,
+    regions?: Region[]
 }
 
 export type Store = {
-    user: User | null, 
-    requestStatuses: Dict<Request>,
     geojsons: GeojsonStore,
     toporefs: TopoRef[],
     intensityMaps: Dict<IntensityMap>

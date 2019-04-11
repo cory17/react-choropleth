@@ -3,6 +3,7 @@ import { Tabs, Table, Tag, Slider } from 'antd'
 import { feature } from 'topojson'
 import { Region } from '../models'
 import { SliderValue } from 'antd/lib/slider';
+import { MAX_INTENSITY, INTENSITY_COLORS } from '../utility';
 const {TabPane} = Tabs
 const {Column} = Table
 
@@ -26,23 +27,6 @@ const PropertyList = ({ items = [] }: { items: PropItem[] }) => (
 
 const renderPropertyList = (_: any, feature: Region) => (
 	<PropertyList items={feature.props} />
-)
-
-const colors = ['#FFEDA0',
-	'#FED976',
-	'#FEB24C',
-	'#FD8D3C',
-	'#FC4E2A',
-	'#E31A1C',
-	'#BD0026',
-	'#800026'
-]
-
-const renderColor = (intensity: number) => (
-	<div>
-		<Slider min={0} max={7} />
-		<Tag color={colors[intensity]}>{intensity}</Tag>
-	</div>
 )
 
 type IntensityCellProps = {
@@ -74,10 +58,10 @@ class IntensityCell extends React.Component<IntensityCellProps> {
 			<div>
 				<Slider value={value}
 					min={0}
-					max={7}
+					max={MAX_INTENSITY}
 					onChange={this.handleChange}
 					onAfterChange={this.handleAfterChange} />
-				<Tag color={colors[value]}>{value}</Tag>
+				<Tag color={INTENSITY_COLORS[value]}>{value}</Tag>
 			</div>
 		)
 	}
