@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/react-choropleth/precache-manifest.01a175132611c74dd35be84904813e3f.js"
+  "/react-choropleth/precache-manifest.64233f46c5655664849705a6e5e5c579.js"
 );
 
 workbox.clientsClaim();
