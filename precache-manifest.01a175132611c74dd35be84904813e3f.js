@@ -1,26 +1,26 @@
 self.__precacheManifest = [
   {
-    "revision": "5369ba4f44ba31339f76",
+    "revision": "a96f4705e68f9f9a4ecd",
     "url": "/react-choropleth/static/css/main.b8609d4c.chunk.css"
   },
   {
-    "revision": "5369ba4f44ba31339f76",
-    "url": "/react-choropleth/static/js/main.5369ba4f.chunk.js"
+    "revision": "a96f4705e68f9f9a4ecd",
+    "url": "/react-choropleth/static/js/main.a96f4705.chunk.js"
   },
   {
     "revision": "a6d224073b4b6cac02b0",
     "url": "/react-choropleth/static/js/runtime~main.a6d22407.js"
   },
   {
-    "revision": "e5e98d9dfbd6a034111f",
+    "revision": "005e845b3b2b13e903e1",
     "url": "/react-choropleth/static/css/2.66da1714.chunk.css"
   },
   {
-    "revision": "e5e98d9dfbd6a034111f",
-    "url": "/react-choropleth/static/js/2.e5e98d9d.chunk.js"
+    "revision": "005e845b3b2b13e903e1",
+    "url": "/react-choropleth/static/js/2.005e845b.chunk.js"
   },
   {
-    "revision": "23271ba0fd9aee138a2074b6efd67874",
+    "revision": "7b74f401cfe3c073978561087e916442",
     "url": "/react-choropleth/index.html"
   }
 ];
