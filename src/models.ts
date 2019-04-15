@@ -17,7 +17,8 @@ export type Dict<T> = {
 
 export type Feature<T> = {
     type: 'Feature',
-    properties: T
+    properties: T,
+    geometry: Geometry
 }
 
 export type Geojson<T = {}> = GeoJSON.FeatureCollection<Geometry, T>
